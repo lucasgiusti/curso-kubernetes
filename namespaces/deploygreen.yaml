@@ -13,4 +13,4 @@ spec:
     spec:
       containers:
         - name: nginx-color
-          image: kubedevio/nginx-color:blue
+          image: kubedevio/nginx-color:green
