@@ -1,0 +1,18 @@
+#criar máquina
+multipass launch -n k8s-01 -c 2 -m 2G -d 20G
+
+#instalar microk8s
+multipass exec k8s-01 -- sudo snap install microk8s --classic --channel=1.18/stable
+
+#permissoes
+multipass exec k8s-01 -- sudo usermod -a -G microk8s ubuntu
+multipass exec k8s-01 -- sudo chown -f -R ubuntu ~/.kube
+multipass restart k8s-01
+
+multipass exec k8s-master -- /snap/bin/microk8s.kubectl config view  --raw
+
+#entrar na máquina
+multipass shell k8s-master
+
+#adicionar node
+microk8s add-node k8s-01
